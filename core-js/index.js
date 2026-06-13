@@ -122,3 +122,64 @@ console.log("hi from core-js");
 // HOF : Higher Order Function : a function that takes another function as an argument or returns a function as a result. It is used to create reusable code and to abstract away common patterns.
 
 
+// -----------------------------------------------------------------------------------------------------------------------------------------------
+
+// Objects in JavaScript are collections of key-value pairs, where the keys are strings and the values can be of any data type. Objects can be created using object literals, constructor functions, or the Object.create() method.
+
+// Object literals : a way to create objects using a simple syntax. We can define properties and methods directly within the curly braces.  
+// let person = {
+//     name: "John",
+//     age: 30,
+//     greet: function() {
+//         console.log("Hello, my name is " + this.name);
+//     }
+// };
+// Constructor functions : a way to create objects using a function that serves as a template for creating multiple instances of the same type of object. We can define properties and methods within the constructor function using the this keyword.
+// function Person(name, age) {
+//     this.name = name;    
+//     this.age = age;
+//     this.greet = function() {
+//         console.log("Hello, my name is " + this.name);
+//     }
+// }
+// let person1 = new Person("John", 30);
+// let person2 = new Person("Jane", 25);
+// Object.create() method : a way to create objects using an existing object as a prototype. We can define properties and methods on the prototype object, and the new object will inherit them.    
+// let personProto = {
+//     greet: function() {
+//         console.log("Hello, my name is " + this.name);       
+//     }
+// };
+// let person1 = Object.create(personProto);
+// person1.name = "John";
+// person1.age = 30;
+// let person2 = Object.create(personProto);
+// person2.name = "Jane";
+// person2.age = 25;
+
+let obj = {
+    name: "John",
+    age: 30,
+}
+
+//delete obj.name;
+console.log(obj); // { age: 30 }
+
+// for(let key in obj)
+// {
+//     console.log(key, obj[key]);
+// }
+
+// for(let key in Object.keys(obj))
+// {
+//     console.log(key, obj[key]);
+// }
+
+// console.log(Object.values(obj)); // [30]
+
+// for(let i in Object.values(obj))
+// {
+//     console.log(Object.values(obj)[i]);
+// }
+
+console.log(Object.entries(obj))
