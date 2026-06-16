@@ -184,6 +184,8 @@ console.log(obj); // { age: 30 }
 
 // console.log(Object.entries(obj)) // [ [ 'name', 'John' ], [ 'age', 30 ] ]
 
+// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
 // array : An ordered list of values, where each value can be of any data type. Arrays can be created using array literals or the Array constructor. Arrays have a length property that returns the number of elements in the array, and they have various methods for manipulating the elements, such as push(), pop(), shift(), unshift(), splice(), slice(), and forEach().
 
 // let arr = [1, 2, 3, 4, 5];       
@@ -345,3 +347,62 @@ console.log(obj); // { age: 30 }
 // console.log(arr1); // [1, 2, 3]   concat() method does not modify the original arrays. It returns a new array that is the result of merging the original arrays.    
 // console.log(arr2); // [4, 5, 6]   concat() method does not modify the original arrays. It returns a new array that is the result of merging the original arrays.     
 
+// Refrences in objects and arrays are stored in heap memory, and when we assign an object or an array to a variable, we are assigning a reference to that object or array in memory. When we modify the object or array through one variable, it will affect all other variables that reference the same object or array in memory.
+
+// let arr1 = [1, 2, 3];
+// let arr2 = arr1; // reference to the value is created in memory
+// console.log(arr1); // [1, 2, 3]
+// console.log(arr2); // [1, 2, 3]
+// arr1.push(4);
+// console.log(arr1); // [1, 2, 3, 4]
+// console.log(arr2); // [1, 2, 3, 4]   arr1 and arr2 reference the same array in memory, so modifying the array through arr1 also modifies the array that arr2 references.     
+
+// let x = 10
+
+// function changevalue(value)
+// {
+//     value = 20; // this will not change the value of x because value is a copy of x in memory, and it is passed by value.
+
+// }
+// changevalue(x);
+// console.log(x); // 10   x is a primitive data type, and it is passed by value, so modifying the value inside the function does not affect the original value of x.
+
+// let arr1 = [1, 2, 3];   
+// function changevalue2(value)
+// {
+//     value.push(4); // this will change the value of arr1 because value is a reference to arr1 in memory, and it is passed by reference.     
+
+// }
+// changevalue2(arr1);
+// console.log(arr1); // [1, 2, 3, 4]   arr1 is a non-primitive data type, and it is passed by reference, so modifying the value inside the function affects the original value of arr1.
+
+// shallow copy : a copy of an object or an array that shares the same reference to the original object or array in memory. A shallow copy can be created using the Object.assign() method for objects and the slice() method for arrays. A shallow copy only copies the first level of properties or elements, and any nested objects or arrays will still reference the same memory location as the original object or array.
+
+// let obj1 = { a: 1, b: 2, c: { d: 3 } };
+// let obj2 = Object.assign({}, obj1); // shallow copy of obj1
+// obj2.a = 10; // this will not change the value of obj1.a because obj2 is a shallow copy of obj1, and it has its own reference to the value of a in memory.    
+// console.log(obj1.a); // 1
+// console.log(obj2.a); // 10   
+// obj2.c.d = 20; // this will change the value of obj1.c.d because obj2 is a shallow copy of obj1, and it shares the same reference to the value of c in memory.
+// console.log(obj1.c.d); // 20
+// console.log(obj2.c.d); // 20 
+
+// using spread operator to create a shallow copy of an object
+// let obj1 = { a: 1, b: 2, c: { d: 3 } };
+// let obj2 = { ...obj1 }; // shallow copy of obj1  
+
+// old way to create a shallow copy of an object stringify and parse
+// let obj1 = { a: 1, b: 2, c: { d: 3 } };
+// let obj2 = JSON.parse(JSON.stringify(obj1)); // shallow copy of obj1 
+// drawback of this method is that it does not copy functions, undefined, and symbols, and it does not handle circular references. It also has performance issues for large objects.
+
+
+// ideal way to create a deep copy is to use structuredClone() method, which creates a deep copy of an object or an array, including all nested objects and arrays. The structuredClone() method is available in modern browsers and Node.js versions 17 and above. It can handle circular references, functions, undefined, and symbols, and it has better performance than the JSON.stringify() and JSON.parse() method for large objects.
+
+// let obj1 = { a: 1, b: 2, c: { d: 3 } };  
+// let obj2 = structuredClone(obj1); // deep copy of obj1
+// obj2.c.d = 20; // this will not change the value of obj1.c.d because obj2 is a deep copy of obj1, and it has its own reference to the value of c in memory.
+// console.log(obj1.c.d); // 3
+// console.log(obj2.c.d); // 20 
+
+//
