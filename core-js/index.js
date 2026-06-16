@@ -1,6 +1,6 @@
 console.log("hi from core-js");
 
-// js is a synchronous , single threaded  language
+// js is a synchronous , single threaded  language 1st class function
 
 // var msg = "hello";
 // var msg = "hi";
@@ -405,4 +405,34 @@ console.log(obj); // { age: 30 }
 // console.log(obj1.c.d); // 3
 // console.log(obj2.c.d); // 20 
 
-//
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// JS always run in two phases : creation phase and execution phase. In the creation phase, the JS engine scans the code and creates a global execution context, which includes the global object (window in browsers), the this keyword, and the variable object (which stores all variables and functions). In the execution phase, the JS engine executes the code line by line, and it creates a new execution context for each function that is called. Each execution context has its own variable object, this keyword, and scope chain.
+
+// execution context : an abstract concept that holds information about the environment in which the current code is being executed. It contains information about the variables, functions, and objects that are accessible in the current scope. Each time a function is called, a new execution context is created and added to the call stack. When the function returns, its execution context is removed from the call stack.
+
+// context will have code area and memory area, code area will have the code to be executed and memory area will have the variables and functions to be stored in memory.
+
+// call stack : a data structure that keeps track of the execution contexts in the order they were created. The call stack follows the Last In First Out (LIFO) principle, meaning that the last execution context added to the stack is the first one to be removed when it finishes executing. When a function is called, a new execution context is created and pushed onto the call stack. When the function returns, its execution context is popped off the call stack, and control returns to the previous execution context.
+
+// scope chain : a list of all the variables and functions that are accessible in the current execution context. Each execution context has its own scope chain, which is created when the execution context is created. The scope chain is used to resolve variable and function references in the current execution context. When a variable or function is referenced, the JS engine looks for it in the current execution context's variable object. If it is not found, the engine looks for it in the parent execution context's variable object, and so on, until it reaches the global execution context. If the variable or function is not found in any of the execution contexts, a ReferenceError is thrown.
+
+
+// hoisting : a behavior in JavaScript where variable and function declarations are moved to the top of their containing scope during the creation phase of the execution context. This means that variables and functions can be referenced before they are declared in the code. However, only the declarations are hoisted, not the initializations. For example, if a variable is declared but not initialized, it will be hoisted to the top of its scope and will have a value of undefined until it is assigned a value later in the code. Functions, on the other hand, are hoisted with their entire definition, so they can be called before they are defined in the code.
+
+// example of hoisting with variables
+// console.log(x); // undefined
+// var x = 5; // variable declaration is hoisted to the top of its scope, but the initialization is not hoisted. Therefore, x is undefined until it is assigned a value later in the code.  
+
+// example of hoisting with functions
+// greet(); // "Hello, world!"
+// function greet() { // function declaration is hoisted to the top of its scope, so it can be called before it is defined in the code.  
+//     console.log("Hello, world!");
+// }
+
+//example with let and const
+// console.log(y); // ReferenceError: Cannot access 'y' before initialization
+// let y = 10; // variable declaration is hoisted to the top of its scope, but the initialization is not hoisted. Therefore, y is in a temporal dead zone until it is assigned a value later in the code.   
+
+//Temporal Dead Zone (TDZ) : a behavior in JavaScript where variables declared with let and const are not accessible before they are declared in the code. This means that if we try to access a variable declared with let or const before it is declared, we will get a ReferenceError. The TDZ is created during the creation phase of the execution context, and it lasts until the variable is declared in the code. This behavior helps to prevent bugs caused by accessing variables before they are initialized.
+
