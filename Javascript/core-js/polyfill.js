@@ -130,37 +130,72 @@
 
 // return acc
 
-Array.prototype.myReduce = function (cb,initialValue)
+// Array.prototype.myReduce = function (cb,initialValue)
+// {
+//     let arr = this;
+//     let accumulator;
+//     let startIndex;
+
+//     if(initialValue !== undefined)
+//     {
+//         accumulator = initialValue;
+//         startIndex = 0;
+//     }
+//     else
+//     {
+//         accumulator = arr[0];
+//         startIndex = 1;
+//     }
+
+//     for(let i = startIndex; i < arr.length; i++)
+//     {
+//         accumulator = cb(accumulator, arr[i], i, arr);
+//     }
+
+//     return accumulator;
+// };
+
+// const result = [1,2,3].myReduce((acc, val)=>{
+//     return acc + val;
+// },0)
+
+// console.log(result) // 6
+
+// Polyfill for promise.all
+
+
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+// Promise.all([promise1, promise2, promise3]).then((values) => {
+//   console.log(values);
+// });
+
+Promise.myAll = function(promises)
 {
-    let arr = this;
-    let accumulator;
-    let startIndex;
+    let count =0;
+    let result = [];
 
-    if(initialValue !== undefined)
-    {
-        accumulator = initialValue;
-        startIndex = 0;
-    }
-    else
-    {
-        accumulator = arr[0];
-        startIndex = 1;
-    }
+    return new Promise((resolve, reject)=>{
 
-    for(let i = startIndex; i < arr.length; i++)
-    {
-        accumulator = cb(accumulator, arr[i], i, arr);
-    }
-
-    return accumulator;
-};
-
-const result = [1,2,3].myReduce((acc, val)=>{
-    return acc + val;
-},0)
-
-console.log(result) // 6
+        promises.forEach((promise, index)=>{
+        
+            Promise.resolve(promise).then((value)=>{
+                result[index]= value;
+                count ++;
+                if(count==promises.length) 
+                {
+                    resolve(result);
+                }
+            })
+            .catch(reject)
+        }
+        )
+    })
+}
 
 
-
-
+Promise.myAll([promise1,promise2, promise3]).then((value)=>{console.log(value)}).catch(console.log)
